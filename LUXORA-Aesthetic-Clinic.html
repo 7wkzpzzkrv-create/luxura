@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>LUXORA Aesthetic Clinic — Precisión Estética de Alto Nivel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ══════════════════════════════════════════
+   VARIABLES & RESET
+══════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --noir:#0e0c09;
+  --deep:#1a1710;
+  --ink:#2c2920;
+  --stone:#7a7060;
+  --sand:#c4b49a;
+  --gold:#c9a96e;
+  --gold2:#e8d5b0;
+  --cream:#f7f3ec;
+  --warm:#faf8f3;
+  --white:#ffffff;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Jost',sans-serif;
+  --r:4px;
+  --tr:0.38s cubic-bezier(.4,0,.2,1);
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--sans);background:var(--warm);color:var(--ink);overflow-x:hidden;cursor:none}
+
+/* Custom cursor */
+.cur{position:fixed;top:0;left:0;width:10px;height:10px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s,width .2s,height .2s,background .2s}
+.cur2{position:fixed;top:0;left:0;width:32px;height:32px;border:1px solid var(--gold);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .35s cubic-bezier(.4,0,.2,1)}
+body:hover .cur{opacity:1}
+
+/* ══════════════════════════════════════════
+   NAV
+══════════════════════════════════════════ */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.5rem 5vw;
+  transition:padding var(--tr),background var(--tr),border-color var(--tr),box-shadow var(--tr);
+  border-bottom:1px solid transparent;
+}
+#nav.scrolled{
+  padding:1rem 5vw;
+  background:rgba(250,248,243,.96);
+  backdrop-filter:blur(16px);
+  border-bottom-color:rgba(201,169,110,.18);
+  box-shadow:0 2px 40px rgba(14,12,9,.06);
+}
+.nav-logo{
+  font-family:var(--serif);font-size:1.3rem;font-weight:300;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--white);text-decoration:none;
+  transition:color var(--tr);white-space:nowrap;
+}
+.nav-logo span{color:var(--gold)}
+#nav.scrolled .nav-logo{color:var(--ink)}
+
+.nav-links{display:flex;gap:2.2rem;list-style:none}
+.nav-links a{
+  font-size:.72rem;font-weight:400;letter-spacing:.18em;
+  text-transform:uppercase;color:rgba(255,255,255,.75);
+  text-decoration:none;transition:color var(--tr);position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;right:0;
+  height:1px;background:var(--gold);
+  transform:scaleX(0);transform-origin:right;transition:transform var(--tr);
+}
+.nav-links a:hover{color:var(--gold)}
+.nav-links a:hover::after{transform:scaleX(1);transform-origin:left}
+#nav.scrolled .nav-links a{color:var(--stone)}
+#nav.scrolled .nav-links a:hover{color:var(--gold)}
+
+.nav-cta{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.65rem 1.5rem;
+  border:1px solid rgba(201,169,110,.5);
+  color:var(--gold);background:transparent;
+  font-family:var(--sans);font-size:.7rem;font-weight:400;letter-spacing:.18em;
+  text-transform:uppercase;text-decoration:none;border-radius:2px;
+  transition:background var(--tr),color var(--tr),border-color var(--tr);white-space:nowrap;
+}
+.nav-cta:hover{background:var(--gold);color:var(--noir);border-color:var(--gold)}
+
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.burger span{display:block;width:22px;height:1.5px;background:var(--white);transition:transform var(--tr),opacity var(--tr)}
+#nav.scrolled .burger span{background:var(--ink)}
+.burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+.mob-menu{
+  display:none;position:fixed;inset:0;z-index:490;
+  background:var(--noir);padding:6rem 5vw 3rem;
+  flex-direction:column;gap:1.5rem;
+  opacity:0;pointer-events:none;transition:opacity var(--tr);
+}
+.mob-menu.open{opacity:1;pointer-events:all}
+.mob-menu a{
+  font-family:var(--serif);font-size:2.2rem;font-weight:300;
+  color:var(--cream);text-decoration:none;
+  border-bottom:1px solid rgba(201,169,110,.15);padding-bottom:1rem;
+  transition:color var(--tr);
+}
+.mob-menu a:hover{color:var(--gold)}
+.mob-menu .nav-cta{margin-top:1rem;max-width:220px;justify-content:center}
+
+/* ══════════════════════════════════════════
+   HERO
+══════════════════════════════════════════ */
+#inicio{
+  min-height:100svh;display:grid;place-items:center;
+  position:relative;overflow:hidden;
+  background:var(--noir);
+  padding:8rem 5vw 8rem;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 55% 70% at 65% 35%,rgba(201,169,110,.1) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 55% at 25% 75%,rgba(201,169,110,.06) 0%,transparent 55%),
+    linear-gradient(165deg,#0e0c09 0%,#1e1b14 50%,#0e0c09 100%);
+}
+.hero-lines{
+  position:absolute;inset:0;overflow:hidden;opacity:.07;
+  background-image:repeating-linear-gradient(0deg,transparent,transparent 79px,rgba(201,169,110,.5) 80px);
+}
+.hero-content{
+  position:relative;z-index:2;max-width:860px;
+  text-align:center;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.8rem;
+  margin-bottom:3rem;
+  font-size:.65rem;font-weight:400;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--gold);
+  opacity:0;animation:fadeUp .8s .2s ease forwards;
+}
+.hero-badge::before,.hero-badge::after{content:'';display:block;width:30px;height:1px;background:var(--gold);opacity:.6}
+.hero-h1{
+  font-family:var(--serif);
+  font-size:clamp(2.8rem,6.5vw,6rem);
+  font-weight:300;line-height:1.1;
+  color:var(--white);margin-bottom:2.4rem;
+  letter-spacing:-.01em;
+  opacity:0;animation:fadeUp .9s .4s ease forwards;
+}
+.hero-h1 em{font-style:italic;color:var(--gold)}
+.hero-sub{
+  font-size:clamp(.9rem,1.5vw,1.1rem);font-weight:200;line-height:1.9;
+  color:rgba(247,243,236,.5);max-width:520px;margin:0 auto 3.5rem;
+  opacity:0;animation:fadeUp .8s .6s ease forwards;
+  letter-spacing:.04em;
+}
+.hero-actions{
+  display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap;
+  opacity:0;animation:fadeUp .8s .8s ease forwards;
+}
+.btn-gold{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:1rem 2.4rem;background:var(--gold);color:var(--noir);
+  font-family:var(--sans);font-size:.75rem;font-weight:500;letter-spacing:.18em;
+  text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;
+  border-radius:2px;transition:background var(--tr),transform var(--tr),box-shadow var(--tr);
+}
+.btn-gold:hover{background:#d4b37c;transform:translateY(-2px);box-shadow:0 10px 30px rgba(201,169,110,.3)}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:1rem 2.4rem;background:transparent;color:var(--white);
+  font-family:var(--sans);font-size:.75rem;font-weight:300;letter-spacing:.18em;
+  text-transform:uppercase;text-decoration:none;border:1px solid rgba(255,255,255,.2);
+  cursor:pointer;border-radius:2px;transition:border-color var(--tr),color var(--tr),transform var(--tr);
+}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+.hero-stats{
+  display:flex;gap:4rem;justify-content:center;flex-wrap:wrap;
+  margin-top:3.5rem;
+  opacity:0;animation:fadeUp .8s 1.2s ease forwards;
+}
+.stat{text-align:center}
+.stat-num{
+  font-family:var(--serif);font-size:2.2rem;font-weight:300;
+  color:var(--white);display:block;line-height:1;
+}
+.stat-num span{color:var(--gold)}
+.stat-lbl{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:.4rem;display:block}
+.hero-scroll{
+  position:absolute;bottom:1.5rem;right:5vw;
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  opacity:0;animation:fadeUp .8s 1.4s ease forwards;
+}
+.hero-scroll span{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.25);writing-mode:vertical-lr}
+.scroll-bar{width:1px;height:50px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollPulse 2s ease-in-out infinite}
+
+/* ══════════════════════════════════════════
+   SECTION COMMON
+══════════════════════════════════════════ */
+section{padding:7rem 5vw}
+.sec-tag{display:block;font-size:.68rem;font-weight:400;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.sec-title{font-family:var(--serif);font-size:clamp(2rem,4vw,3.2rem);font-weight:300;line-height:1.15;color:var(--ink);margin-bottom:1.2rem}
+.sec-title em{font-style:italic}
+.sec-sub{font-size:.95rem;font-weight:200;line-height:1.8;color:var(--stone);max-width:540px}
+.gold-bar{width:44px;height:1px;background:var(--gold);margin:1.6rem 0}
+.centered{text-align:center}
+.centered .gold-bar{margin:1.6rem auto}
+.centered .sec-sub{margin:0 auto}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ══════════════════════════════════════════
+   PROCEDIMIENTOS
+══════════════════════════════════════════ */
+#procedimientos{background:var(--white)}
+.proc-header{max-width:1300px;margin:0 auto 4rem}
+.proc-tabs{
+  display:flex;gap:.6rem;margin-top:2.5rem;flex-wrap:wrap;
+}
+.proc-tab{
+  padding:.7rem 1.8rem;
+  font-family:var(--sans);font-size:.72rem;font-weight:400;letter-spacing:.15em;
+  text-transform:uppercase;border:1px solid #ddd5c4;background:transparent;
+  color:var(--stone);cursor:pointer;border-radius:2px;transition:all var(--tr);
+}
+.proc-tab.active,.proc-tab:hover{background:var(--gold);color:var(--noir);border-color:var(--gold)}
+
+.proc-panel{display:none;max-width:1300px;margin:0 auto}
+.proc-panel.active{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem}
+
+.proc-card{
+  background:var(--warm);border:1px solid #ede5d8;border-radius:6px;
+  padding:2rem;position:relative;overflow:hidden;
+  transition:transform var(--tr),box-shadow var(--tr),border-color var(--tr);
+}
+.proc-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  transform:scaleX(0);transition:transform var(--tr);
+}
+.proc-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(14,12,9,.09);border-color:var(--gold2)}
+.proc-card:hover::before{transform:scaleX(1)}
+
+.proc-icon{
+  width:44px;height:44px;border-radius:50%;
+  border:1px solid var(--gold2);display:grid;place-items:center;
+  color:var(--gold);font-size:1.2rem;margin-bottom:1.4rem;
+  background:linear-gradient(135deg,rgba(201,169,110,.08),transparent);
+}
+.proc-name{font-family:var(--serif);font-size:1.2rem;font-weight:400;color:var(--ink);margin-bottom:.6rem;line-height:1.2}
+.proc-desc{font-size:.82rem;font-weight:200;line-height:1.7;color:var(--stone);margin-bottom:1.4rem}
+.proc-price{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-size:.8rem;font-weight:400;letter-spacing:.08em;
+  color:var(--gold);background:rgba(201,169,110,.08);
+  padding:.4rem .9rem;border-radius:20px;border:1px solid rgba(201,169,110,.25);
+}
+.proc-type-badge{
+  position:absolute;top:1.2rem;right:1.2rem;
+  font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--stone);background:#f0ece3;padding:.3rem .7rem;border-radius:20px;
+}
+
+/* ══════════════════════════════════════════
+   ANTES & DESPUÉS
+══════════════════════════════════════════ */
+#resultados{background:var(--cream)}
+.results-grid{
+  max-width:1300px;margin:3.5rem auto 0;
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:2rem;
+}
+.result-card{
+  border-radius:8px;overflow:hidden;
+  background:var(--white);
+  box-shadow:0 4px 24px rgba(14,12,9,.07);
+  transition:transform var(--tr),box-shadow var(--tr);
+}
+.result-card:hover{transform:translateY(-5px);box-shadow:0 20px 50px rgba(14,12,9,.12)}
+.result-imgs{display:grid;grid-template-columns:1fr 1fr;position:relative}
+.result-img{
+  aspect-ratio:3/4;overflow:hidden;position:relative;
+}
+.result-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease;filter:saturate(.9)}
+.result-card:hover .result-img img{transform:scale(1.04);filter:saturate(1)}
+.result-label{
+  position:absolute;top:.8rem;left:.8rem;
+  font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;
+  padding:.3rem .7rem;border-radius:20px;
+  background:rgba(14,12,9,.5);color:var(--white);backdrop-filter:blur(4px);
+}
+.result-divider{
+  position:absolute;top:0;left:50%;bottom:0;width:2px;
+  background:linear-gradient(to bottom,transparent,var(--gold),transparent);
+  z-index:2;
+}
+.result-divider::after{
+  content:'';position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:28px;height:28px;border-radius:50%;
+  background:var(--gold);
+  display:grid;place-items:center;
+  box-shadow:0 0 0 4px rgba(201,169,110,.2);
+}
+.result-info{padding:1.4rem 1.6rem}
+.result-proc{font-family:var(--serif);font-size:1.05rem;font-weight:400;color:var(--ink);margin-bottom:.3rem}
+.result-detail{font-size:.78rem;font-weight:200;color:var(--stone)}
+
+/* ══════════════════════════════════════════
+   PRECIOS
+══════════════════════════════════════════ */
+#precios{background:var(--noir);position:relative;overflow:hidden}
+#precios::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 80% at 50% 0%,rgba(201,169,110,.07) 0%,transparent 60%);
+}
+#precios .sec-title{color:var(--white)}
+#precios .sec-tag{color:var(--gold)}
+#precios .sec-sub{color:rgba(247,243,236,.5)}
+.price-grid{
+  max-width:1300px;margin:3.5rem auto 0;
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.5rem;
+  position:relative;z-index:1;
+}
+.price-card{
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(201,169,110,.15);
+  border-radius:6px;padding:2rem;
+  transition:background var(--tr),border-color var(--tr),transform var(--tr);
+  position:relative;overflow:hidden;
+}
+.price-card.featured{
+  border-color:rgba(201,169,110,.5);
+  background:rgba(201,169,110,.07);
+}
+.price-card.featured::after{
+  content:'Más popular';position:absolute;top:1rem;right:1rem;
+  font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;
+  background:var(--gold);color:var(--noir);padding:.3rem .8rem;border-radius:20px;font-weight:500;
+}
+.price-card:hover{transform:translateY(-4px);border-color:rgba(201,169,110,.45);background:rgba(255,255,255,.05)}
+.price-category{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem}
+.price-name{font-family:var(--serif);font-size:1.15rem;font-weight:300;color:var(--white);margin-bottom:.5rem;line-height:1.3}
+.price-range{font-family:var(--serif);font-size:1.7rem;font-weight:300;color:var(--gold);line-height:1;margin-bottom:.4rem}
+.price-range small{font-size:.9rem;color:var(--sand)}
+.price-note{font-size:.75rem;font-weight:200;color:rgba(255,255,255,.3);line-height:1.6;margin-bottom:1.4rem}
+.price-includes{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.price-includes li{font-size:.78rem;font-weight:200;color:rgba(247,243,236,.55);padding-left:1.1rem;position:relative}
+.price-includes li::before{content:'—';position:absolute;left:0;color:var(--gold);font-size:.7rem}
+
+/* ══════════════════════════════════════════
+   GALERÍA
+══════════════════════════════════════════ */
+#galeria{background:var(--warm)}
+.gallery-grid{
+  max-width:1300px;margin:3rem auto 0;
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  grid-auto-rows:220px;
+  gap:12px;
+}
+.gitem{
+  overflow:hidden;border-radius:5px;position:relative;
+  background:var(--sand);
+}
+.gitem::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(14,12,9,.5) 0%,transparent 60%);
+  opacity:0;transition:opacity .4s;
+}
+.gitem:hover::after{opacity:1}
+.gitem img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease;filter:saturate(.85)}
+.gitem:hover img{transform:scale(1.07);filter:saturate(1)}
+.gitem-label{
+  position:absolute;bottom:1rem;left:1rem;z-index:2;
+  font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--white);
+  opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s;
+}
+.gitem:hover .gitem-label{opacity:1;transform:none}
+.g1{grid-column:1/5;grid-row:1/3}
+.g2{grid-column:5/9;grid-row:1}
+.g3{grid-column:9/13;grid-row:1}
+.g4{grid-column:5/8;grid-row:2}
+.g5{grid-column:8/13;grid-row:2}
+.g6{grid-column:1/4;grid-row:3}
+.g7{grid-column:4/8;grid-row:3}
+.g8{grid-column:8/13;grid-row:3}
+
+/* ══════════════════════════════════════════
+   TESTIMONIOS
+══════════════════════════════════════════ */
+#testimonios{background:var(--cream)}
+.testi-grid{
+  max-width:1300px;margin:3.5rem auto 0;
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.8rem;
+}
+.testi-card{
+  background:var(--white);
+  border:1px solid #ede5d8;border-radius:8px;
+  padding:2.2rem;
+  transition:transform var(--tr),box-shadow var(--tr);
+  position:relative;
+}
+.testi-card::before{
+  content:'\201C';position:absolute;top:1rem;right:1.5rem;
+  font-family:var(--serif);font-size:5rem;line-height:1;
+  color:var(--gold2);font-style:italic;
+}
+.testi-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(14,12,9,.08)}
+.stars{color:var(--gold);font-size:.8rem;letter-spacing:.06em;margin-bottom:1.2rem}
+.testi-text{
+  font-family:var(--serif);font-size:1rem;font-weight:300;font-style:italic;
+  line-height:1.75;color:var(--ink);margin-bottom:1.8rem;position:relative;z-index:1;
+}
+.testi-author{display:flex;align-items:center;gap:1rem}
+.testi-av{
+  width:44px;height:44px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--gold),var(--sand));
+  display:grid;place-items:center;
+  font-family:var(--serif);font-size:1.1rem;color:var(--white);font-weight:300;
+}
+.testi-name{font-size:.85rem;font-weight:500;color:var(--ink);letter-spacing:.04em}
+.testi-role{font-size:.72rem;font-weight:200;color:var(--stone);margin-top:.1rem}
+.testi-proc{font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-top:.15rem}
+
+/* ══════════════════════════════════════════
+   CONTACTO
+══════════════════════════════════════════ */
+#contacto{background:var(--white)}
+.contact-wrap{
+  max-width:1300px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;
+}
+.contact-info-block{margin-bottom:2rem}
+.ci-item{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.8rem}
+.ci-icon{
+  width:44px;height:44px;flex-shrink:0;border-radius:8px;
+  border:1px solid var(--gold2);display:grid;place-items:center;
+  color:var(--gold);font-size:1rem;background:rgba(201,169,110,.05);
+}
+.ci-label{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--stone);margin-bottom:.2rem}
+.ci-val{font-family:var(--serif);font-size:1.1rem;color:var(--ink);text-decoration:none;transition:color var(--tr)}
+a.ci-val:hover{color:var(--gold)}
+.contact-ctas{display:flex;flex-direction:column;gap:.9rem;margin-top:2.5rem}
+.btn-wa{
+  display:inline-flex;align-items:center;justify-content:center;gap:.7rem;
+  padding:1rem 2rem;background:#25D366;color:#fff;
+  font-family:var(--sans);font-size:.75rem;font-weight:500;letter-spacing:.14em;
+  text-transform:uppercase;text-decoration:none;border-radius:2px;
+  transition:background var(--tr),transform var(--tr),box-shadow var(--tr);
+}
+.btn-wa:hover{background:#1fb455;transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,.3)}
+.btn-tel{
+  display:inline-flex;align-items:center;justify-content:center;gap:.7rem;
+  padding:1rem 2rem;background:transparent;color:var(--ink);
+  font-family:var(--sans);font-size:.75rem;font-weight:400;letter-spacing:.14em;
+  text-transform:uppercase;text-decoration:none;
+  border:1px solid #ded8cc;border-radius:2px;
+  transition:all var(--tr);
+}
+.btn-tel:hover{border-color:var(--gold);background:var(--gold);color:var(--noir);transform:translateY(-2px)}
+.contact-form{display:flex;flex-direction:column;gap:1.2rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.field{display:flex;flex-direction:column;gap:.45rem}
+.field label{font-size:.65rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--stone)}
+.field input,.field textarea,.field select{
+  width:100%;padding:.9rem 1rem;
+  background:var(--warm);color:var(--ink);
+  border:1px solid #ddd5c4;border-radius:2px;
+  font-family:var(--sans);font-size:.9rem;font-weight:200;
+  outline:none;transition:border-color var(--tr),box-shadow var(--tr);appearance:none;
+}
+.field input:focus,.field textarea:focus,.field select:focus{
+  border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,169,110,.1);
+}
+.field textarea{resize:vertical;min-height:130px}
+.privacy-note{font-size:.72rem;font-weight:200;color:var(--stone);line-height:1.6}
+.privacy-note a{color:var(--gold)}
+
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+footer{
+  background:var(--noir);padding:4rem 5vw 2.5rem;
+  border-top:1px solid rgba(201,169,110,.12);
+}
+.footer-top{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;
+  max-width:1300px;margin:0 auto;padding-bottom:3rem;
+  border-bottom:1px solid rgba(201,169,110,.08);
+}
+.footer-logo{
+  font-family:var(--serif);font-size:1.4rem;font-weight:300;
+  letter-spacing:.22em;color:var(--white);text-decoration:none;
+  display:inline-block;margin-bottom:1rem;
+}
+.footer-logo span{color:var(--gold)}
+.footer-tagline{font-size:.82rem;font-weight:200;line-height:1.7;color:rgba(255,255,255,.35);max-width:260px}
+.footer-col h4{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.7rem}
+.footer-col ul a{font-size:.82rem;font-weight:200;color:rgba(255,255,255,.4);text-decoration:none;transition:color var(--tr)}
+.footer-col ul a:hover{color:var(--gold)}
+.footer-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  max-width:1300px;margin:2rem auto 0;flex-wrap:wrap;gap:1rem;
+}
+.footer-copy{font-size:.72rem;font-weight:200;color:rgba(255,255,255,.25);letter-spacing:.05em}
+.footer-social{display:flex;gap:1rem}
+.social-btn{
+  width:36px;height:36px;border-radius:50%;
+  border:1px solid rgba(201,169,110,.2);
+  display:grid;place-items:center;color:rgba(255,255,255,.4);
+  text-decoration:none;font-size:.85rem;
+  transition:border-color var(--tr),color var(--tr),background var(--tr);
+}
+.social-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,169,110,.08)}
+
+/* ══════════════════════════════════════════
+   FLOATING WA BUTTON
+══════════════════════════════════════════ */
+.wa-float{
+  position:fixed;bottom:2rem;right:2rem;z-index:400;
+  width:56px;height:56px;background:#25D366;border-radius:50%;
+  display:grid;place-items:center;
+  box-shadow:0 4px 20px rgba(37,211,102,.4);
+  text-decoration:none;color:var(--white);font-size:1.5rem;
+  transition:transform var(--tr),box-shadow var(--tr);
+}
+.wa-float:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(37,211,102,.55)}
+
+/* ══════════════════════════════════════════
+   ANIMATIONS
+══════════════════════════════════════════ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes scrollPulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media(max-width:1000px){
+  .footer-top{grid-template-columns:1fr 1fr;gap:2.5rem}
+}
+@media(max-width:780px){
+  .nav-links,.nav-cta{display:none}
+  .burger{display:flex}
+  .mob-menu{display:flex}
+  .contact-wrap{grid-template-columns:1fr;gap:3rem}
+  .form-row{grid-template-columns:1fr}
+  .hero-stats{gap:2.5rem}
+  .gallery-grid{grid-template-columns:repeat(6,1fr);grid-auto-rows:180px}
+  .g1{grid-column:1/7;grid-row:1}
+  .g2{grid-column:1/4;grid-row:2}
+  .g3{grid-column:4/7;grid-row:2}
+  .g4{grid-column:1/4;grid-row:3}
+  .g5{grid-column:4/7;grid-row:3}
+  .g6{grid-column:1/7;grid-row:4}
+  .g7{grid-column:1/4;grid-row:5}
+  .g8{grid-column:4/7;grid-row:5}
+  .footer-top{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;align-items:flex-start}
+  .cur,.cur2{display:none}
+  body{cursor:auto}
+}
+@media(max-width:500px){
+  #inicio{padding:7rem 5vw 10rem}
+  .hero-stats{flex-direction:column;gap:1.5rem}
+  section{padding:5rem 5vw}
+  .proc-tabs{gap:.4rem}
+  .proc-tab{padding:.55rem 1.2rem;font-size:.65rem}
+}
+</style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div class="cur" id="cur"></div>
+<div class="cur2" id="cur2"></div>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/525512345678?text=Hola%2C%20me%20interesa%20una%20consulta%20en%20LUXORA%20Aesthetic%20Clinic" class="wa-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- ══ NAV ══ -->
+<nav id="nav">
+  <a href="#inicio" class="nav-logo">LUXORA<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#procedimientos">Procedimientos</a></li>
+    <li><a href="#precios">Precios</a></li>
+    <li><a href="#resultados">Resultados</a></li>
+    <li><a href="#testimonios">Testimonios</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="#contacto" class="nav-cta">Agendar consulta</a>
+  <button class="burger" id="burgerBtn" aria-label="Menú"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mob-menu" id="mobMenu">
+  <a href="#inicio" onclick="closeNav()">Inicio</a>
+  <a href="#procedimientos" onclick="closeNav()">Procedimientos</a>
+  <a href="#precios" onclick="closeNav()">Precios</a>
+  <a href="#resultados" onclick="closeNav()">Resultados</a>
+  <a href="#testimonios" onclick="closeNav()">Testimonios</a>
+  <a href="#contacto" onclick="closeNav()">Contacto</a>
+  <a href="#contacto" class="nav-cta" onclick="closeNav()">Agendar consulta</a>
+</div>
+
+<!-- ══ HERO ══ -->
+<section id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Clínica Estética de Alto Nivel</div>
+    <h1 class="hero-h1">Realza tu belleza<br/>con <em>precisión estética</em></h1>
+    <p class="hero-sub">Procedimientos de vanguardia realizados por especialistas certificados. Resultados naturales, experiencia de lujo.</p>
+    <div class="hero-actions">
+      <a href="#contacto" class="btn-gold">Agendar consulta →</a>
+      <a href="#procedimientos" class="btn-ghost">Ver procedimientos</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">+<span>2,400</span></span><span class="stat-lbl">Pacientes satisfechas</span></div>
+      <div class="stat"><span class="stat-num"><span>15</span></span><span class="stat-lbl">Años de experiencia</span></div>
+      <div class="stat"><span class="stat-num"><span>98</span>%</span><span class="stat-lbl">Índice de satisfacción</span></div>
+      <div class="stat"><span class="stat-num"><span>40</span>+</span><span class="stat-lbl">Procedimientos disponibles</span></div>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="scroll-bar"></div><span>Scroll</span></div>
+</section>
+
+<!-- ══ PROCEDIMIENTOS ══ -->
+<section id="procedimientos">
+  <div class="proc-header reveal">
+    <span class="sec-tag">Tratamientos exclusivos</span>
+    <h2 class="sec-title">Nuestros <em>procedimientos</em></h2>
+    <div class="gold-bar"></div>
+    <p class="sec-sub">Tecnología de última generación y técnicas avanzadas para resultados que transforman con naturalidad.</p>
+    <div class="proc-tabs" role="tablist">
+      <button class="proc-tab active" onclick="showTab('no-quir')" role="tab">No Quirúrgicos</button>
+      <button class="proc-tab" onclick="showTab('quir')" role="tab">Quirúrgicos</button>
+    </div>
+  </div>
+
+  <!-- No Quirúrgicos -->
+  <div class="proc-panel active" id="no-quir">
+    <div class="proc-card reveal">
+      <div class="proc-icon">✦</div>
+      <span class="proc-type-badge">No Quirúrgico</span>
+      <h3 class="proc-name">Botox</h3>
+      <p class="proc-desc">Relajación de músculos faciales para suavizar líneas de expresión y arrugas dinámicas. Efecto natural y duradero.</p>
+      <span class="proc-price">$2,000 – $6,000 MXN</span>
+    </div>
+    <div class="proc-card reveal">
+      <div class="proc-icon">◈</div>
+      <span class="proc-type-badge">No Quirúrgico</span>
+      <h3 class="proc-name">Rellenos Dérmicos</h3>
+      <p class="proc-desc">Ácido hialurónico de alta densidad para restaurar volumen, definir contornos y rejuvenecer la piel desde adentro.</p>
+      <span class="proc-price">$5,000 – $15,000 MXN</span>
+    </div>
+    <div class="proc-card reveal">
+      <div class="proc-icon">❋</div>
+      <span class="proc-type-badge">No Quirúrgico</span>
+      <h3 class="proc-name">Rejuvenecimiento Facial</h3>
+      <p class="proc-desc">Protocolos combinados que estimulan colágeno y elastina para una piel visiblemente más joven y luminosa.</p>
+      <span class="proc-price">$3,000 – $10,000 MXN</span>
+    </div>
+    <div class="proc-card reveal">
+      <div class="proc-icon">⟡</div>
+      <span class="proc-type-badge">No Quirúrgico</span>
+      <h3 class="proc-name">Tratamientos Láser</h3>
+      <p class="proc-desc">Tecnología láser de última generación para manchas, acné, cicatrices y rejuvenecimiento cutáneo profundo.</p>
+      <span class="proc-price">$2,500 – $12,000 MXN</span>
+    </div>
+    <div class="proc-card reveal">
+      <div class="proc-icon">◇</div>
+      <span class="proc-type-badge">No Quirúrgico</span>
+      <h3 class="proc-name">Foxy Eyes con Hilos Tensores</h3>
+      <p class="proc-desc">Elevación y estilización de la mirada con hilos biodegradables. Efecto cat-eye inmediato sin cirugía.</p>
+      <span class="proc-price">$8,000 – $20,000 MXN</span>
+    </div>
+    <div class="proc-card reveal">
+      <div class="proc-icon">✿</div>
+      <span class="proc-type-badge">No Quirúrgico</span>
+      <h3 class="proc-name">Skin Boosters</h3>
+      <p class="proc-desc">Microinyecciones de ácido hialurónico ultra-fluido que hidratan profundamente y mejoran la textura y luminosidad.</p>
+      <span class="proc-price">$4,000 – $12,000 MXN</span>
+    </div>
+    <div class="proc-card reveal">
+      <div class="proc-icon">⬡</div>
+      <span class="proc-type-badge">No Quirúrgico</span>
+      <h3 class="proc-name">Contorno Mandibular</h3>
+      <p class="proc-desc">Definición y armonización de la mandíbula con rellenos y técnicas combinadas para un perfil más esculpido.</p>
+      <span class="proc-price">$7,000 – $25,000 MXN</span>
+    </div>
+  </div>
+
+  <!-- Quirúrgicos -->
+  <div class="proc-panel" id="quir">
+    <div class="proc-card reveal">
+      <div class="proc-icon">✦</div>
+      <span class="proc-type-badge">Quirúrgico</span>
+      <h3 class="proc-name">Rinoplastia</h3>
+      <p class="proc-desc">Remodelación y armonización de la nariz con técnicas abiertas y cerradas. Resultados naturales y permanentes.</p>
+      <span class="proc-price">$50,000 – $120,000 MXN</span>
+    </div>
+    <div class="proc-card reveal">
+      <div class="proc-icon">◈</div>
+      <span class="proc-type-badge">Quirúrgico</span>
+      <h3 class="proc-name">Liposucción</h3>
+      <p class="proc-desc">Eliminación selectiva de grasa localizada mediante tecnología ultrasónica y por láser para contornear la silueta.</p>
+      <span class="proc-price">$60,000 – $180,000 MXN</span>
+    </div>
+    <div class="proc-card reveal">
+      <div class="proc-icon">❋</div>
+      <span class="proc-type-badge">Quirúrgico</span>
+      <h3 class="proc-name">Lifting Facial</h3>
+      <p class="proc-desc">Ritidoplastia completa para recuperar la firmeza y juventud del rostro y cuello, con resultados que perduran décadas.</p>
+      <span class="proc-price">$100,000 – $300,000 MXN</span>
+    </div>
+    <div class="proc-card reveal">
+      <div class="proc-icon">⟡</div>
+      <span class="proc-type-badge">Quirúrgico</span>
+      <h3 class="proc-name">Aumento de Busto</h3>
+      <p class="proc-desc">Implantes anatómicos y redondos de última generación con técnicas de mínima cicatriz y máximo resultado estético.</p>
+      <span class="proc-price">$80,000 – $200,000 MXN</span>
+    </div>
+    <div class="proc-card reveal">
+      <div class="proc-icon">◇</div>
+      <span class="proc-type-badge">Quirúrgico</span>
+      <h3 class="proc-name">Blefaroplastia</h3>
+      <p class="proc-desc">Corrección de párpados caídos y bolsas bajo los ojos para una mirada fresca, abierta y rejuvenecida.</p>
+      <span class="proc-price">$40,000 – $100,000 MXN</span>
+    </div>
+    <div class="proc-card reveal">
+      <div class="proc-icon">✿</div>
+      <span class="proc-type-badge">Quirúrgico</span>
+      <h3 class="proc-name">Mentoplastia</h3>
+      <p class="proc-desc">Aumento o reducción del mentón con implantes o técnicas óseas para lograr una armonía facial perfecta.</p>
+      <span class="proc-price">$50,000 – $120,000 MXN</span>
+    </div>
+    <div class="proc-card reveal">
+      <div class="proc-icon">⬡</div>
+      <span class="proc-type-badge">Quirúrgico</span>
+      <h3 class="proc-name">Bichectomía</h3>
+      <p class="proc-desc">Extracción de las bolsas de Bichat para adelgazar el rostro y definir los pómulos con un resultado sutil y elegante.</p>
+      <span class="proc-price">$25,000 – $60,000 MXN</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ RESULTADOS ANTES / DESPUÉS ══ -->
+<section id="resultados">
+  <div class="reveal centered">
+    <span class="sec-tag">Transformaciones reales</span>
+    <h2 class="sec-title">Antes & <em>Después</em></h2>
+    <div class="gold-bar"></div>
+    <p class="sec-sub">Resultados auténticos de nuestras pacientes. Cada tratamiento es único y personalizado.</p>
+  </div>
+  <div class="results-grid">
+    <div class="result-card reveal">
+      <div class="result-imgs">
+        <div class="result-img">
+          <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&auto=format&fit=crop&q=70&sat=-80&bri=-10" alt="Antes rinoplastia"/>
+          <span class="result-label">Antes</span>
+        </div>
+        <div class="result-img">
+          <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&auto=format&fit=crop&q=80" alt="Después rinoplastia"/>
+          <span class="result-label">Después</span>
+        </div>
+        <div class="result-divider"></div>
+      </div>
+      <div class="result-info">
+        <p class="result-proc">Rinoplastia</p>
+        <p class="result-detail">3 meses post-operatorio</p>
+      </div>
+    </div>
+    <div class="result-card reveal">
+      <div class="result-imgs">
+        <div class="result-img">
+          <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&auto=format&fit=crop&q=70&sat=-60" alt="Antes rellenos"/>
+          <span class="result-label">Antes</span>
+        </div>
+        <div class="result-img">
+          <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&auto=format&fit=crop&q=80" alt="Después rellenos"/>
+          <span class="result-label">Después</span>
+        </div>
+        <div class="result-divider"></div>
+      </div>
+      <div class="result-info">
+        <p class="result-proc">Rellenos Dérmicos + Skin Boosters</p>
+        <p class="result-detail">Resultado inmediato</p>
+      </div>
+    </div>
+    <div class="result-card reveal">
+      <div class="result-imgs">
+        <div class="result-img">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&auto=format&fit=crop&q=70&sat=-70&bri=-5" alt="Antes lifting"/>
+          <span class="result-label">Antes</span>
+        </div>
+        <div class="result-img">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&auto=format&fit=crop&q=80" alt="Después lifting"/>
+          <span class="result-label">Después</span>
+        </div>
+        <div class="result-divider"></div>
+      </div>
+      <div class="result-info">
+        <p class="result-proc">Lifting Facial</p>
+        <p class="result-detail">6 meses post-operatorio</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRECIOS ══ -->
+<section id="precios">
+  <div class="reveal centered">
+    <span class="sec-tag">Inversión en ti</span>
+    <h2 class="sec-title" style="color:var(--white)">Rangos de <em>precios</em></h2>
+    <div class="gold-bar"></div>
+    <p class="sec-sub">Planes de financiamiento disponibles. Primera consulta gratuita.</p>
+  </div>
+  <div class="price-grid">
+    <div class="price-card reveal">
+      <p class="price-category">No Quirúrgico</p>
+      <h3 class="price-name">Botox</h3>
+      <p class="price-range">$2,000 <small>– $6,000</small></p>
+      <p class="price-note">MXN · por sesión · zonas individuales o combinadas</p>
+      <ul class="price-includes"><li>Evaluación facial gratuita</li><li>Toxina botulínica premium</li><li>Seguimiento a los 15 días</li></ul>
+    </div>
+    <div class="price-card reveal featured">
+      <p class="price-category">No Quirúrgico</p>
+      <h3 class="price-name">Rellenos Dérmicos</h3>
+      <p class="price-range">$5,000 <small>– $15,000</small></p>
+      <p class="price-note">MXN · por área tratada</p>
+      <ul class="price-includes"><li>Ácido hialurónico premium</li><li>Labios, pómulos o ojeras</li><li>Efecto inmediato</li><li>Retoque incluido</li></ul>
+    </div>
+    <div class="price-card reveal">
+      <p class="price-category">No Quirúrgico</p>
+      <h3 class="price-name">Foxy Eyes</h3>
+      <p class="price-range">$8,000 <small>– $20,000</small></p>
+      <p class="price-note">MXN · con hilos tensores PDO</p>
+      <ul class="price-includes"><li>Hilos biodegradables certificados</li><li>Sin cortes ni cicatrices</li><li>Resultados hasta 18 meses</li></ul>
+    </div>
+    <div class="price-card reveal">
+      <p class="price-category">No Quirúrgico</p>
+      <h3 class="price-name">Contorno Mandibular</h3>
+      <p class="price-range">$7,000 <small>– $25,000</small></p>
+      <p class="price-note">MXN · tratamiento completo</p>
+      <ul class="price-includes"><li>Rellenos de alta densidad</li><li>Diseño facial personalizado</li><li>Técnica combinada</li></ul>
+    </div>
+    <div class="price-card reveal">
+      <p class="price-category">Quirúrgico</p>
+      <h3 class="price-name">Rinoplastia</h3>
+      <p class="price-range">$50,000 <small>– $120,000</small></p>
+      <p class="price-note">MXN · incluye honorarios, anestesia y hospitalización</p>
+      <ul class="price-includes"><li>Cirujano certificado AMCPER</li><li>Anestesiólogo especializado</li><li>Hospitalización incluida</li><li>Seguimiento 12 meses</li></ul>
+    </div>
+    <div class="price-card reveal">
+      <p class="price-category">Quirúrgico</p>
+      <h3 class="price-name">Liposucción</h3>
+      <p class="price-range">$60,000 <small>– $180,000</small></p>
+      <p class="price-note">MXN · según zonas y técnica</p>
+      <ul class="price-includes"><li>Tecnología VASER o láser</li><li>Prendas de compresión incluidas</li><li>Sesiones de drenaje incluidas</li></ul>
+    </div>
+    <div class="price-card reveal">
+      <p class="price-category">Quirúrgico</p>
+      <h3 class="price-name">Aumento de Busto</h3>
+      <p class="price-range">$80,000 <small>– $200,000</small></p>
+      <p class="price-note">MXN · implantes incluidos</p>
+      <ul class="price-includes"><li>Implantes Mentor o Allergan</li><li>Técnica de mínima cicatriz</li><li>Garantía del fabricante</li></ul>
+    </div>
+    <div class="price-card reveal">
+      <p class="price-category">Quirúrgico</p>
+      <h3 class="price-name">Lifting Facial</h3>
+      <p class="price-range">$100,000 <small>– $300,000</small></p>
+      <p class="price-note">MXN · procedimiento premium completo</p>
+      <ul class="price-includes"><li>Ritidoplastia SMAS profunda</li><li>Resultados que duran décadas</li><li>Protocolo de recuperación VIP</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ GALERÍA ══ -->
+<section id="galeria">
+  <div class="reveal centered" style="margin-bottom:3rem">
+    <span class="sec-tag">Nuestras instalaciones</span>
+    <h2 class="sec-title">Galería <em>LUXORA</em></h2>
+    <div class="gold-bar"></div>
+  </div>
+  <div class="gallery-grid" style="max-width:1300px;margin:0 auto">
+    <div class="gitem g1 reveal"><img src="https://images.unsplash.com/photo-1629909615184-74f495363b67?w=800&auto=format&fit=crop&q=80" alt="Clínica LUXORA"/><span class="gitem-label">Recepción Principal</span></div>
+    <div class="gitem g2 reveal"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&auto=format&fit=crop&q=80" alt="Sala de tratamiento"/><span class="gitem-label">Sala de Tratamiento</span></div>
+    <div class="gitem g3 reveal"><img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&auto=format&fit=crop&q=80" alt="Quirófano"/><span class="gitem-label">Quirófano Premium</span></div>
+    <div class="gitem g4 reveal"><img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&auto=format&fit=crop&q=80" alt="Consultorio"/><span class="gitem-label">Consultorio VIP</span></div>
+    <div class="gitem g5 reveal"><img src="https://images.unsplash.com/photo-1487088678257-3a541e6e3922?w=700&auto=format&fit=crop&q=80" alt="Zona de recuperación"/><span class="gitem-label">Zona de Recuperación</span></div>
+    <div class="gitem g6 reveal"><img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&auto=format&fit=crop&q=80" alt="Tratamiento facial"/><span class="gitem-label">Tratamientos Faciales</span></div>
+    <div class="gitem g7 reveal"><img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=700&auto=format&fit=crop&q=80" alt="Especialista"/><span class="gitem-label">Nuestro Equipo</span></div>
+    <div class="gitem g8 reveal"><img src="https://images.unsplash.com/photo-1638202993928-7267aad84c31?w=700&auto=format&fit=crop&q=80" alt="Tecnología láser"/><span class="gitem-label">Tecnología Láser</span></div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIOS ══ -->
+<section id="testimonios">
+  <div class="reveal centered">
+    <span class="sec-tag">Voces que confían</span>
+    <h2 class="sec-title">Testimonios de <em>pacientes</em></h2>
+    <div class="gold-bar"></div>
+    <p class="sec-sub">La satisfacción de nuestras pacientes es el mejor reflejo de nuestro trabajo.</p>
+  </div>
+  <div class="testi-grid" style="max-width:1300px;margin:3.5rem auto 0">
+    <div class="testi-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">Me hice la rinoplastia con LUXORA y el resultado superó todas mis expectativas. El equipo fue increíblemente profesional y el seguimiento postoperatorio fue impecable. Me siento completamente yo, pero mejor.</p>
+      <div class="testi-author">
+        <div class="testi-av">A</div>
+        <div><p class="testi-name">Andrea M.</p><p class="testi-role">Paciente desde 2022</p><p class="testi-proc">Rinoplastia</p></div>
+      </div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">Los rellenos dérmicos y skin boosters cambiaron mi piel. Llevaba años buscando una clínica donde me sintiera realmente escuchada. LUXORA no solo me dio resultados naturales, sino una experiencia verdaderamente de lujo.</p>
+      <div class="testi-author">
+        <div class="testi-av">V</div>
+        <div><p class="testi-name">Valentina R.</p><p class="testi-role">Paciente desde 2023</p><p class="testi-proc">Rellenos + Skin Boosters</p></div>
+      </div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">El lifting facial fue una decisión que tomé después de mucho pensarlo. El Dr. me explicó todo con detalle, sin presiones. A seis meses, parezco diez años más joven pero con una apariencia completamente natural. Infinitamente agradecida.</p>
+      <div class="testi-author">
+        <div class="testi-av">C</div>
+        <div><p class="testi-name">Carolina L.</p><p class="testi-role">Paciente desde 2021</p><p class="testi-proc">Lifting Facial</p></div>
+      </div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">Los Foxy Eyes con hilos tensores fueron una revelación. Sin cirugía, sin tiempo de recuperación. Salí de la clínica caminando y con una mirada completamente transformada. Es exactamente lo que quería: resultados reales y sutiles.</p>
+      <div class="testi-author">
+        <div class="testi-av">S</div>
+        <div><p class="testi-name">Sofía P.</p><p class="testi-role">Paciente desde 2024</p><p class="testi-proc">Foxy Eyes con Hilos</p></div>
+      </div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">La bichectomía y el contorno mandibular combinados me dieron la armonía facial que siempre quise. El equipo de LUXORA es el mejor que he conocido: técnica impecable, atención personalizada y un ambiente de clínica que se siente como spa de lujo.</p>
+      <div class="testi-author">
+        <div class="testi-av">I</div>
+        <div><p class="testi-name">Isabella T.</p><p class="testi-role">Paciente desde 2023</p><p class="testi-proc">Bichectomía + Mandíbula</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACTO ══ -->
+<section id="contacto">
+  <div class="contact-wrap">
+    <div class="reveal">
+      <span class="sec-tag">Escríbenos</span>
+      <h2 class="sec-title">Agenda tu<br/><em>consulta gratuita</em></h2>
+      <div class="gold-bar"></div>
+      <p class="sec-sub">Nuestro equipo de especialistas está listo para orientarte. Primera consulta sin costo, sin compromisos.</p>
+      <br/>
+      <div class="contact-info-block">
+        <div class="ci-item">
+          <div class="ci-icon">📞</div>
+          <div><p class="ci-label">Teléfono / WhatsApp</p><a href="tel:+525512345678" class="ci-val">+52 (55) 1234-5678</a></div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon">✉</div>
+          <div><p class="ci-label">Correo electrónico</p><a href="mailto:hola@luxora.clinic" class="ci-val">hola@luxora.clinic</a></div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon">📍</div>
+          <div><p class="ci-label">Ubicación</p><span class="ci-val" style="font-size:1rem">Av. Presidente Masaryk 123, Polanco, CDMX</span></div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon">🕐</div>
+          <div><p class="ci-label">Horario</p><span class="ci-val" style="font-size:1rem">Lun – Vie: 9:00 – 19:00 | Sáb: 10:00 – 15:00</span></div>
+        </div>
+      </div>
+      <div class="contact-ctas">
+        <a href="https://wa.me/525512345678?text=Hola%2C%20me%20gustar%C3%ADa%20agendar%20una%20consulta%20en%20LUXORA%20Aesthetic%20Clinic" class="btn-wa" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Chatear por WhatsApp
+        </a>
+        <a href="tel:+525512345678" class="btn-tel">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.5 11.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.41 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.37a16 16 0 006.72 6.72l1.74-1.74a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          Llamar ahora
+        </a>
+      </div>
+    </div>
+    <div class="reveal">
+      <form class="contact-form" onsubmit="submitForm(event)">
+        <div class="form-row">
+          <div class="field"><label>Nombre</label><input type="text" placeholder="Alejandra García" required/></div>
+          <div class="field"><label>Apellido</label><input type="text" placeholder="Martínez" required/></div>
+        </div>
+        <div class="field"><label>Correo electrónico</label><input type="email" placeholder="tu@correo.com" required/></div>
+        <div class="field"><label>Teléfono</label><input type="tel" placeholder="+52 55 0000 0000"/></div>
+        <div class="field">
+          <label>Procedimiento de interés</label>
+          <select>
+            <option value="">Selecciona un procedimiento…</option>
+            <optgroup label="No Quirúrgicos">
+              <option>Botox</option>
+              <option>Rellenos Dérmicos</option>
+              <option>Rejuvenecimiento Facial</option>
+              <option>Tratamientos Láser</option>
+              <option>Foxy Eyes con Hilos Tensores</option>
+              <option>Skin Boosters</option>
+              <option>Contorno Mandibular</option>
+            </optgroup>
+            <optgroup label="Quirúrgicos">
+              <option>Rinoplastia</option>
+              <option>Liposucción</option>
+              <option>Lifting Facial</option>
+              <option>Aumento de Busto</option>
+              <option>Blefaroplastia</option>
+              <option>Mentoplastia</option>
+              <option>Bichectomía</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="field"><label>Mensaje</label><textarea placeholder="Cuéntanos sobre tus objetivos estéticos o cualquier pregunta que tengas…"></textarea></div>
+        <p class="privacy-note">Al enviar, aceptas nuestra <a href="#">política de privacidad</a>. Tu información es confidencial y nunca será compartida.</p>
+        <div style="margin-top:.5rem"><button type="submit" class="btn-gold" style="width:100%;justify-content:center;padding:1.1rem">Enviar consulta →</button></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <a href="#inicio" class="footer-logo">LUXORA<span>.</span></a>
+      <p class="footer-tagline">Clínica estética de alto nivel. Precisión, ciencia y arte al servicio de tu belleza en Polanco, CDMX.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Procedimientos</h4>
+      <ul>
+        <li><a href="#procedimientos">Botox</a></li>
+        <li><a href="#procedimientos">Rellenos Dérmicos</a></li>
+        <li><a href="#procedimientos">Foxy Eyes</a></li>
+        <li><a href="#procedimientos">Rinoplastia</a></li>
+        <li><a href="#procedimientos">Lifting Facial</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Clínica</h4>
+      <ul>
+        <li><a href="#resultados">Resultados</a></li>
+        <li><a href="#precios">Precios</a></li>
+        <li><a href="#testimonios">Testimonios</a></li>
+        <li><a href="#galeria">Galería</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="tel:+525512345678">+52 (55) 1234-5678</a></li>
+        <li><a href="mailto:hola@luxora.clinic">hola@luxora.clinic</a></li>
+        <li><a href="#">Masaryk 123, Polanco</a></li>
+        <li><a href="#">Lun–Vie 9:00–19:00</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 LUXORA Aesthetic Clinic · Todos los derechos reservados · CDMX, México</p>
+    <div class="footer-social">
+      <a href="#" class="social-btn" aria-label="Instagram">IG</a>
+      <a href="#" class="social-btn" aria-label="Facebook">FB</a>
+      <a href="#" class="social-btn" aria-label="TikTok">TK</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── Custom cursor ── */
+const cur=document.getElementById('cur'),cur2=document.getElementById('cur2');
+document.addEventListener('mousemove',e=>{
+  cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';
+  requestAnimationFrame(()=>{cur2.style.left=e.clientX+'px';cur2.style.top=e.clientY+'px'});
+});
+document.querySelectorAll('a,button,.proc-card,.testi-card,.result-card,.price-card,.gitem').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='6px';cur.style.height='6px';cur2.style.width='48px';cur2.style.height='48px'});
+  el.addEventListener('mouseleave',()=>{cur.style.width='10px';cur.style.height='10px';cur2.style.width='32px';cur2.style.height='32px'});
+});
+
+/* ── Nav scroll shrink ── */
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60),{passive:true});
+
+/* ── Mobile nav ── */
+const burger=document.getElementById('burgerBtn'),mob=document.getElementById('mobMenu');
+burger.addEventListener('click',()=>{
+  const o=mob.classList.toggle('open');burger.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';
+});
+function closeNav(){mob.classList.remove('open');burger.classList.remove('open');document.body.style.overflow=''}
+
+/* ── Procedure tabs ── */
+function showTab(id){
+  document.querySelectorAll('.proc-tab').forEach((t,i)=>t.classList.toggle('active',['no-quir','quir'][i]===id));
+  document.querySelectorAll('.proc-panel').forEach(p=>p.classList.toggle('active',p.id===id));
+}
+
+/* ── Scroll reveal ── */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{if(e.isIntersecting){e.target.style.transitionDelay=(Array.from(e.target.parentElement?.children||[]).indexOf(e.target)%5)*.09+'s';e.target.classList.add('in');obs.unobserve(e.target)}})
+},{threshold:.1,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* ── Counter animation ── */
+function animateCounters(){
+  document.querySelectorAll('.stat-num span').forEach(el=>{
+    const target=parseInt(el.textContent.replace(/\D/g,''));
+    let n=0;const step=Math.ceil(target/60);
+    const t=setInterval(()=>{n=Math.min(n+step,target);el.textContent=target.toString().includes(',')?(n>=1000?n.toLocaleString():n):n;if(n>=target)clearInterval(t)},25);
+  });
+}
+let counted=false;
+const heroObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting&&!counted){counted=true;animateCounters()}})},{threshold:.5});
+heroObs.observe(document.getElementById('inicio'));
+
+/* ── Form submit ── */
+function submitForm(e){
+  e.preventDefault();
+  const btn=e.target.querySelector('button[type=submit]');
+  btn.textContent='✓ ¡Mensaje enviado con éxito!';btn.style.background='#5a9a6a';btn.disabled=true;
+  setTimeout(()=>{btn.textContent='Enviar consulta →';btn.style.background='';btn.disabled=false;e.target.reset()},3500);
+}
+
+/* ── Smooth anchor (fallback for older browsers) ── */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}
+  });
+});
+</script>
+</body>
+</html>
